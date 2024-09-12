@@ -23,7 +23,7 @@ const NavBar = () => {
     </>
   );
   return (
-    <div className="bg-black lg:py-4 titillium-web-regular">
+    <div className="bg-black lg:py-4 titillium-web-regular lg:block hidden">
       <CenterAlign>
         <div className="flex items-center justify-between ">
           <div className="flex items-center lg:gap-x-11">

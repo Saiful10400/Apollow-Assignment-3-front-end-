@@ -1,9 +1,11 @@
+import Hero from "../../Layouts/Hero/Hero";
 
 
 const Home = () => {
   return(
     <>
-<h1>HOme</h1>
+
+<Hero/>
     </>
   )
 };
