@@ -10,7 +10,7 @@ const App = () => {
         Increment
       </button>
       <button onClick={()=>dispatch(makeZero())} className="text-xl border border-black rounded-lg px-2 py-1">
-        Make Zero
+        Make it Zero
       </button>
       <h1 className="text-4xl">{data}</h1>
       <button onClick={()=>dispatch(decrement())} className="text-xl border border-black rounded-lg px-2 py-1 ">
