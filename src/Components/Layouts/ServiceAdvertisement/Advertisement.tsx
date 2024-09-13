@@ -45,7 +45,7 @@ const Advertisement = () => {
                         <img src={user3} className="w-[50px] object-cover h-[50px] rounded-full" alt="" />
                     </div>
                     <h1 className="text-4xl font-medium">Inter National Best Seller Globally</h1>
-                    <div className=" -b-2    mt-5"></div>
+                    <div className=" border-b-2 border-black   mt-5"></div>
                     <div className="flex justify-between mt-3"><span className="text-xl flex items-center gap-3"><CiGlobe className="text-3xl" /> Washington DC</span><GoArrowUpRight className="text-4xl" /></div>
                 </div>
                 
