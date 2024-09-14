@@ -9,7 +9,7 @@ const Advertisement = () => {
     return (
        <div className="bg-white">
          <CenterAlign>
-            <div className="grid grid-cols-10 grid-rows-8 h-[600px]     ">
+            <div className="grid grid-cols-1 lg:grid-cols-10 lg:grid-rows-8 lg:h-[600px] ">
                 <div className="row-span-4       col-span-4 bg-[#ff8651] p-5">
                    <div className="flex gap-5 items-center">
                    <span className="to-center w-[60px] h-[30px] rounded-full bg-black  text-[#ff8651]">5.0 <IoStar /></span>
