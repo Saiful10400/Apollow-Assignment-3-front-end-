@@ -1,14 +1,14 @@
-import React from "react";
-import testuser from "../../assets/advertisement/user1.jpg";
+
 import getNumberArrayFromNumber from "../../Utils/getNumberArrayFromNumber";
 import { FaStar } from "react-icons/fa6";
 import "./style.css";
+
 const ReviewCard = ({ img, ratings, testimonials,user }) => {
   return (
     <div className="bg-[#f9f9f9] shadow-lg rounded-lg p-5">
       <img
-        className="w-[70px] rounded-full object-cover"
-        src={testuser}
+        className="w-[70px] h-[70px] rounded-full object-cover"
+        src={"/src/assets/advertisement/"+img}
         alt=""
       />
       <div className="flex items-center my-3 ">
