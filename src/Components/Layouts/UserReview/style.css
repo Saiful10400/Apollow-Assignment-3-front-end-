@@ -1,16 +1,9 @@
-#app {
-    height: 100%;
-  }
-  html,
-  body {
-    position: relative;
-    height: 100%;
-  }
+
   
   body {
-    background: #eee;
+
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 14px;
+   
     color: #000;
     margin: 0;
     padding: 0;
@@ -39,7 +32,7 @@
   .swiper {
     width: 100%;
     height: max-content;
-    margin: 20px auto;
+    
   }
   .append-buttons {
     text-align: center;
@@ -49,8 +42,8 @@
   .append-buttons button {
     display: inline-block;
     cursor: pointer;
-    border: 1px solid #007aff;
-    color: #007aff;
+    border: 1px solid #000000;
+    color: #000000;
     text-decoration: none;
     padding: 4px 10px;
     border-radius: 4px;
