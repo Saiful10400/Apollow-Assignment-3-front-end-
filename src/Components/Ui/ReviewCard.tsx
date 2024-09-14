@@ -1,7 +1,7 @@
 
 import getNumberArrayFromNumber from "../../Utils/getNumberArrayFromNumber";
 import { FaStar } from "react-icons/fa6";
-import "./style.css";
+
 
 const ReviewCard = ({ img, ratings, testimonials,user }) => {
   return (
