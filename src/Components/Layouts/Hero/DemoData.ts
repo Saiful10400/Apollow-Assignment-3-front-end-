@@ -6,7 +6,7 @@ import keyboard5 from "../../../assets/Hero/kb5.webp";
 import keyboard6 from "../../../assets/Hero/kb6.webp";
 
 import brand1 from "../../../assets/Hero/BrandLogo/brand1.webp"
-import brand2 from "../../../assets/Hero/BrandLogo/brand2.webp"
+import brand2 from "../../../assets/Hero/BrandLogo/brand1.webp"
 import brand3 from "../../../assets/Hero/BrandLogo/brand3.webp"
 import brand4 from "../../../assets/Hero/BrandLogo/brand4.webp"
 import brand5 from "../../../assets/Hero/BrandLogo/brand5.webp"

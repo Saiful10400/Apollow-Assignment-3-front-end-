@@ -11,6 +11,9 @@ import "./style.css"
 
 // import required modules
 import { Pagination, Navigation,Autoplay } from 'swiper/modules';
+import CenterAlign from '../../Helper/CenterAlign';
+import ReviewCard from '../../Ui/ReviewCard';
+import getReviewData from './DemoData';
 
 export default function UserReview() {
   const [swiperRef, setSwiperRef] = useState(null);
@@ -45,7 +48,8 @@ export default function UserReview() {
   };
 
   return (
-    <>
+   <CenterAlign>
+     <>
       <Swiper
         onSwiper={setSwiperRef}
         slidesPerView={3}
@@ -62,13 +66,14 @@ export default function UserReview() {
         modules={[Pagination, Navigation,Autoplay]}
         className="mySwiper"
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
+        
+       {
+        getReviewData()?.map((item,idx)=><SwiperSlide key={idx}><ReviewCard user={item.user} img={item.photo} ratings={item.review} testimonials={item.testimonial}/></SwiperSlide>)
+       }
       </Swiper>
 
       
     </>
+   </CenterAlign>
   );
 }
