@@ -11,6 +11,7 @@ import "./style.css"
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import getKeyboardData from './DemoData';
 
 export default function Hero() {
   const progressCircle = useRef(null);
@@ -19,6 +20,12 @@ export default function Hero() {
     progressCircle.current.style.setProperty('--progress', 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
+
+
+
+
+const keyboardData=getKeyboardData()
+
   return (
     <>
       <Swiper
@@ -36,15 +43,12 @@ export default function Hero() {
         onAutoplayTimeLeft={onAutoplayTimeLeft}
         className="mySwiper"
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
+        {
+            keyboardData?.map((item,idx)=>(
+                <SwiperSlide><img key={idx} src={item.photo} alt="" /></SwiperSlide>
+            ))
+        }
+       
         <div className="autoplay-progress" slot="container-end">
           <svg viewBox="0 0 48 48" ref={progressCircle}>
             <circle cx="24" cy="24" r="20"></circle>
