@@ -1,10 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import imageUpload from "../../Utils/imageUpload";
 import InputField from "./Input";
 import Button from "./Button";
-
+import { useCreateProductMutation } from "../../Redux/api/api";
+import swal from "sweetalert";
 const Modal = () => {
-  const [imageUrl, setImageUrl] = useState(null);
+  const inetialValue = {
+    name: "",
+    price: "",
+    quantity: "",
+    rating: "",
+    description: "",
+    brand: "",
+    img: "",
+  };
+
+  const [formData, setFormData] = useState(inetialValue);
+
+
+const update = (data) => {
+console.log(data,"data..")
+  setFormData({ ...formData, ...data });
+};
+
   const [isUploading, setIsUploading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   // image upload handle.
@@ -12,7 +30,7 @@ const Modal = () => {
     const reader = new FileReader();
 
     reader.onload = (event) => {
-      setImageUrl(event.target.result);
+      update({ img: event.target.result });
     };
     reader.readAsDataURL(e.target.files[0]);
 
@@ -22,31 +40,44 @@ const Modal = () => {
     imageUpload(e.target.files[0])
       .then((details) => details.json())
       .then((res) => {
-        setImageUrl(res.data.display_url);
+        update({ img: res.data.display_url });
         setIsUploading(false);
       })
       .catch(() => {
-        isUploading(false)
+        isUploading(false);
         setErrorMessage(
           <span className="font-bold text-red-400">"Upload Failed!"</span>
         );
       });
   };
 
+  const [
+    createRoom,
+    { isLoading: roomLoading, data: roomData, error: roomError },
+  ] = useCreateProductMutation();
+
   // form submit handle.
+
+
   const formSubmitHandle = (e) => {
     e.preventDefault();
-   if(isUploading && !imageUrl) return
-    const form = e.target;
-    const name = form.name.value;
-    const price = form.price.value;
-    const quantity = form.quantity.value;
-    const rating = form.rating.value;
-    const description = form.description.value;
-    const brand = form.brand.value;
-    const img = imageUrl;
-    console.log({name,price,quantity,rating,description,brand,img})
+
+    if (isUploading && !formData.img) return;
+
+    createRoom({ ...formData });
   };
+
+  useEffect(() => {
+    if (roomData?.statusCode === 200) {
+      setFormData(inetialValue)
+      document.getElementById("my_modal")?.close();
+      swal("Success", roomData.message, "success");
+    } else if (roomError) {
+      document.getElementById("my_modal")?.close();
+      swal("Failed", roomError?.data?.message, "error");
+    }
+  }, [roomData, roomError]);
+
   return (
     <dialog id="my_modal" className="modal">
       <div className="modal-box lg:max-w-[50vw] ">
@@ -64,7 +95,7 @@ const Modal = () => {
             htmlFor="product_image"
           >
             <div className="rounded-lg overflow-hidden w-full h-[200px] ">
-              {imageUrl ? (
+              {formData?.img ? (
                 <div className="relative w-full h-full">
                   {isUploading && (
                     <div className="to-center flex-col text-gray-200 rounded-lg absolute top-0 left-0 w-full h-full bg-[#3b3b3bc0]">
@@ -80,7 +111,7 @@ const Modal = () => {
                   )}
                   <img
                     className="w-full h-full object-cover"
-                    src={imageUrl}
+                    src={formData?.img}
                     alt=""
                   />
                 </div>
@@ -93,33 +124,48 @@ const Modal = () => {
           </label>
           <input
             className="hidden"
+             accept="image/*"
             id="product_image"
             type="file"
             onInput={imageUploadHandle}
           />
           <form onSubmit={formSubmitHandle} className="lg:w-[50%] " action="">
             <div className="grid grid-cols-1 gap-3 gap- lg:grid-cols-2">
-              <InputField type="text" name="name" placeholder="Product Name" />
-              <InputField type="text" name="brand" placeholder="Brand Name" />
+              <InputField
+                type="text"
+                altimeValue={formData.name}
+                valueUpdate={(e) => update({ name: e.target.value })}
+                placeholder="Product Name"
+              />
+              <InputField
+                type="text"
+                altimeValue={formData.brand}
+                valueUpdate={(e) => update({ brand: e.target.value })}
+                placeholder="Brand Name"
+              />
               <InputField
                 type="number"
-                name="price"
+                altimeValue={formData.price}
+                valueUpdate={(e) => update({ price: parseInt(e.target.value) })}
                 placeholder="Product Price"
               />
               <InputField
                 type="number"
-                name="quantity"
+                altimeValue={formData.quantity}
+                valueUpdate={(e) => update({ quantity: parseInt(e.target.value) })}
                 placeholder="Product Quantity"
               />
               <InputField
                 type="number"
-                name="rating"
+                altimeValue={formData.rating}
+                valueUpdate={(e) => update({ rating: parseInt(e.target.value) })}
                 placeholder="Product Rating"
               />
             </div>
             <InputField
               type="textarea"
-              name="description"
+              altimeValue={formData.description}
+              valueUpdate={(e) => update({ description: e.target.value })}
               placeholder="Product Description"
             />
             <div className="text-end">

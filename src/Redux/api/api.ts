@@ -9,12 +9,11 @@ export const baseApi=createApi(
             return{
                 createProduct:builder.mutation({
                     query:(payload)=>{
-                        console.log(payload)
-                        // return{
-                        //     url:"/product",
-                        //     method:"POST",
-                        //     body:payload
-                        // }
+                        return{
+                            url:"/product",
+                            method:"POST",
+                            body:payload
+                        }
                     }
                 }),
                 
