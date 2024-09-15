@@ -23,7 +23,7 @@ export default function Hero() {
 
   const[activeIndex,setActiveIndex]=useState(0)
 
-console.log(activeIndex)
+
 
 const keyboardData=getKeyboardData()
 

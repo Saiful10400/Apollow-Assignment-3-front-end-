@@ -1,10 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "./feathcer/counterSlice";
+import { baseApi } from "./api/api";
 
 const store=configureStore({
     reducer:{
-        counterStore:counterReducer
-    }
+        counterStore:counterReducer,
+        [baseApi.reducerPath]:baseApi.reducer
+    },
+    middleware:(getDefaultMiddleware)=>getDefaultMiddleware().concat(baseApi.middleware)
 })
 
 
