@@ -19,7 +19,7 @@ const Modal = () => {
 
 
 const update = (data) => {
-console.log(data,"data..")
+
   setFormData({ ...formData, ...data });
 };
 

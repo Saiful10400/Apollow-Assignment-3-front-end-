@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import InputField from "./Input";
-import { useCreateProductMutation, useUpdateProductMutation } from "../../Redux/api/api";
+import {
+  useCreateProductMutation,
+  useUpdateProductMutation,
+} from "../../Redux/api/api";
 import Button from "./Button";
 import { useSelector } from "react-redux";
 import imageUpload from "../../Utils/imageUpload";
@@ -8,8 +11,6 @@ import swal from "sweetalert";
 import { useAppDispatch } from "../../Redux/feathcer/hoocks";
 import { UpdateFired } from "../../Redux/feathcer/DashboardSlice";
 const UpdateModal = () => {
-   
- 
   const inetialValue = {
     name: "",
     price: "",
@@ -23,41 +24,38 @@ const UpdateModal = () => {
   const [formData, setFormData] = useState(inetialValue);
 
   const update = (data) => {
-  
     setFormData({ ...formData, ...data });
   };
 
-  const {UpdateProduct,updateing}=useSelector(e=>e.DashbpardStore)
-console.log(UpdateProduct,'this is updated product...')
+  const { UpdateProduct, updateing } = useSelector((e) => e.DashbpardStore);
 
 
-useEffect(()=>{
-update(UpdateProduct)
-},[UpdateProduct,updateing])
+  useEffect(() => {
+    update(UpdateProduct);
+  }, [UpdateProduct, updateing]);
 
   const [isUploading, setIsUploading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
   // image upload handle.
   const imageUpdateUploadHandle = async (e) => {
-console.log(e,"iMge uplodas dudatea...")
-    
-if(!e?.target?.files[0]){
-  return
-}
-setIsUploading(true)
+
+
+    if (!e?.target?.files[0]) {
+      return;
+    }
+    setIsUploading(true);
     const reader = new FileReader();
 
     reader.onload = (event) => {
-      
-        setErrorMessage(null);
+      setErrorMessage(null);
 
       update({ img: event.target.result });
     };
     reader.readAsDataURL(e.target.files[0]);
 
     // upload image.
-   
+
     imageUpload(e.target.files[0])
       .then((details) => details.json())
       .then((res) => {
@@ -72,7 +70,6 @@ setIsUploading(true)
       });
   };
 
- 
   const [
     updateRoom,
     { isLoading: roomLoading, data: roomData, error: roomError },
@@ -80,21 +77,19 @@ setIsUploading(true)
 
   // form submit handle.
 
-const dispatch=useAppDispatch()
-  const formUpdateHandle = (e) => { 
+  const dispatch = useAppDispatch();
+  const formUpdateHandle = (e) => {
     e.preventDefault();
-  
 
     if (isUploading && !formData.img) return;
 
     updateRoom({ ...formData });
-    
   };
 
   useEffect(() => {
-    dispatch(UpdateFired())
+    dispatch(UpdateFired());
     if (roomData?.statusCode === 200) {
-      setFormData(inetialValue)
+      setFormData(inetialValue);
       document.getElementById("my_modal_2")?.close();
       swal("Success", roomData.message, "success");
     } else if (roomError) {
@@ -102,7 +97,7 @@ const dispatch=useAppDispatch()
       swal("Failed", roomError?.data?.message, "error");
     }
   }, [roomData, roomError]);
-console.log(formData,"form data.")
+ 
   return (
     <dialog id="my_modal_2" className="modal">
       <div className="modal-box lg:max-w-[50vw] ">
@@ -120,16 +115,19 @@ console.log(formData,"form data.")
             htmlFor="product_image"
           >
             <div className="rounded-lg overflow-hidden w-full h-[200px] ">
-             
-                <div className="relative w-full h-full">
-                  {isUploading&&<div className="to-center w-full h-full absolute bg-[#6d6d6dc9] flex-col text-white"><span className="loading loading-ring loading-lg"></span> {errorMessage||"Uploading"}</div>}
-                  <img
-                    className="w-full h-full object-cover"
-                    src={formData?.img}
-                    alt=""
-                  />
-                </div>
-              
+              <div className="relative w-full h-full">
+                {isUploading && (
+                  <div className="to-center w-full h-full absolute bg-[#6d6d6dc9] flex-col text-white">
+                    <span className="loading loading-ring loading-lg"></span>{" "}
+                    {errorMessage || "Uploading"}
+                  </div>
+                )}
+                <img
+                  className="w-full h-full object-cover"
+                  src={formData?.img}
+                  alt=""
+                />
+              </div>
             </div>
           </label>
           <input

@@ -1,19 +1,53 @@
 import { LiaEditSolid } from "react-icons/lia";
 import { MdDeleteForever } from "react-icons/md";
-import { useGetProductsQuery } from "../../../Redux/api/api";
+import { useDeleteProductMutation, useGetProductsQuery } from "../../../Redux/api/api";
 import UpdateModal from "../../Ui/UpdateModal";
 import { useAppDispatch } from "../../../Redux/feathcer/hoocks";
 import { setProduct } from "../../../Redux/feathcer/DashboardSlice";
+import Swal from "sweetalert2";
+import { useEffect } from "react";
 const Table = () => {
   const { isLoading, data } = useGetProductsQuery(null);
 
-  const dispatch=useAppDispatch()
+  const dispatch = useAppDispatch();
   // update handle.
   const updateHandle = (data) => {
-    console.log(data,"DATA.")
-    dispatch(setProduct(data))
+
+    dispatch(setProduct(data));
     document.getElementById("my_modal_2")?.showModal();
   };
+
+
+  const [
+    deleteProduct,
+    { isLoading: roomLoading, data: productData, error: roomError },
+  ]=useDeleteProductMutation()
+
+
+  // deleting handle.
+  const deleteHandle = (id) => {
+    Swal.fire({
+      title: "Do you want to delete the product?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "No",
+      denyButtonText: `Yes`
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isDenied) {
+        
+        deleteProduct({_id:id})
+      } 
+    });
+  };
+
+useEffect(()=>{
+if(productData){
+  if(productData.statusCode===200){
+Swal.fire("Product delete successfully!", "", "success");
+  }
+}
+},[productData])
 
   return (
     <div className="overflow-x-auto mt-5">
@@ -29,9 +63,7 @@ const Table = () => {
           </tr>
         </thead>
         <tbody className="lg:text-base">
-          {isLoading
-            ? ""
-            : data?.data.map((item, idx) => {
+          {isLoading&& data?.data.map((item, idx) => {
                 return (
                   <tr
                     key={item._id}
@@ -64,7 +96,10 @@ const Table = () => {
                       >
                         <LiaEditSolid />
                       </button>
-                      <button className="btn btn-error text-white btn-sm text-lg ml-4">
+                      <button
+                        onClick={() => deleteHandle(item._id)}
+                        className="btn btn-error text-white btn-sm text-lg ml-4"
+                      >
                         <MdDeleteForever />
                       </button>
                     </th>
@@ -73,6 +108,8 @@ const Table = () => {
               })}
         </tbody>
       </table>
+      {isLoading&&<div className="to-center w-full"><span className="loading loading-spinner loading-lg"></span></div>}
+      {data?.data?.length===0&&<div className="to-center w-full text-lg mt-4">No Product Available!</div>}
       <UpdateModal />
     </div>
   );
