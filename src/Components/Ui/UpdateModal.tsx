@@ -112,7 +112,7 @@ const UpdateModal = () => {
         <div className="flex flex-col lg:flex-row gap-5">
           <label
             className="lg:w-1/2 h-max cursor-pointer"
-            htmlFor="product_image"
+            htmlFor="product_image_update"
           >
             <div className="rounded-lg overflow-hidden w-full h-[200px] ">
               <div className="relative w-full h-full">
@@ -133,7 +133,7 @@ const UpdateModal = () => {
           <input
             className="hidden"
             accept="image/*"
-            id="product_image"
+            id="product_image_update"
             type="file"
             onInput={imageUpdateUploadHandle}
           />

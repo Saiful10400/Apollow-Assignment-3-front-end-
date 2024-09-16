@@ -63,8 +63,13 @@ const update = (data) => {
 
   const formSubmitHandle = (e) => {
     e.preventDefault();
-
-    if (isUploading && !formData.img) return;
+    if(isUploading) return
+    if (!formData.img){
+      
+      document.getElementById("my_modal")?.close();
+      swal("Failed", "You have to upload product image.", "error");
+      return
+    }
 
     createRoom({ ...formData });
   };
@@ -171,7 +176,7 @@ const update = (data) => {
               placeholder="Product Description"
             />
             <div className="text-end">
-              <Button text={"Create"} />
+              <Button disable={isUploading} text={"Create"} />
             </div>
           </form>
         </div>

@@ -63,7 +63,7 @@ Swal.fire("Product delete successfully!", "", "success");
           </tr>
         </thead>
         <tbody className="lg:text-base">
-          {isLoading&& data?.data.map((item, idx) => {
+          {!isLoading&& data?.data.map((item, idx) => {
                 return (
                   <tr
                     key={item._id}
@@ -89,7 +89,7 @@ Swal.fire("Product delete successfully!", "", "success");
                     </td>
                     <td className="font-semibold">$ {item.price}</td>
                     <td className="font-semibold">{item.brand}</td>
-                    <th>
+                    <td className="w-max flex mt-3 ">
                       <button
                         onClick={() => updateHandle(item)}
                         className="btn btn-success text-white btn-sm text-lg"
@@ -102,7 +102,7 @@ Swal.fire("Product delete successfully!", "", "success");
                       >
                         <MdDeleteForever />
                       </button>
-                    </th>
+                    </td>
                   </tr>
                 );
               })}
