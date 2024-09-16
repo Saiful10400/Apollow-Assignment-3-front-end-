@@ -14,7 +14,7 @@ const Dashboard = () => {
       <div className="flex justify-between items-center lg:mt-2">
         <h1 className="text-3xl font-bold">Dashboard</h1>
         <Button onClick={createNewButtonHandle} text="Create New" />
-        <Modal />
+        {/* <Modal /> */}
       </div>
       <Table />
     </CenterAlign>

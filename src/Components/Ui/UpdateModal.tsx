@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
-import imageUpload from "../../Utils/imageUpload";
+import React, { useEffect, useState } from "react";
 import InputField from "./Input";
+import { useCreateProductMutation, useUpdateProductMutation } from "../../Redux/api/api";
 import Button from "./Button";
-import { useCreateProductMutation } from "../../Redux/api/api";
+import { useSelector } from "react-redux";
+import imageUpload from "../../Utils/imageUpload";
 import swal from "sweetalert";
-const Modal = () => {
+import { useAppDispatch } from "../../Redux/feathcer/hoocks";
+import { UpdateFired } from "../../Redux/feathcer/DashboardSlice";
+const UpdateModal = () => {
+   
+ 
   const inetialValue = {
     name: "",
     price: "",
@@ -17,28 +22,42 @@ const Modal = () => {
 
   const [formData, setFormData] = useState(inetialValue);
 
+  const update = (data) => {
+  
+    setFormData({ ...formData, ...data });
+  };
 
-const update = (data) => {
-console.log(data,"data..")
-  setFormData({ ...formData, ...data });
-};
+  const {UpdateProduct,updateing}=useSelector(e=>e.DashbpardStore)
+console.log(UpdateProduct,'this is updated product...')
+
+
+useEffect(()=>{
+update(UpdateProduct)
+},[UpdateProduct,updateing])
 
   const [isUploading, setIsUploading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+
   // image upload handle.
-  const imageUploadHandle = async (e) => {
+  const imageUpdateUploadHandle = async (e) => {
+console.log(e,"iMge uplodas dudatea...")
+    
+if(!e?.target?.files[0]){
+  return
+}
+setIsUploading(true)
     const reader = new FileReader();
-    if(!e?.target?.files[0]){
-      return
-    }
+
     reader.onload = (event) => {
+      
+        setErrorMessage(null);
+
       update({ img: event.target.result });
     };
     reader.readAsDataURL(e.target.files[0]);
 
     // upload image.
-    setIsUploading(true);
-    setErrorMessage(null);
+   
     imageUpload(e.target.files[0])
       .then((details) => details.json())
       .then((res) => {
@@ -53,35 +72,39 @@ console.log(data,"data..")
       });
   };
 
+ 
   const [
-    createRoom,
+    updateRoom,
     { isLoading: roomLoading, data: roomData, error: roomError },
-  ] = useCreateProductMutation();
+  ] = useUpdateProductMutation();
 
   // form submit handle.
 
-
-  const formSubmitHandle = (e) => {
+const dispatch=useAppDispatch()
+  const formUpdateHandle = (e) => { 
     e.preventDefault();
+  
 
     if (isUploading && !formData.img) return;
 
-    createRoom({ ...formData });
+    updateRoom({ ...formData });
+    
   };
 
   useEffect(() => {
+    dispatch(UpdateFired())
     if (roomData?.statusCode === 200) {
       setFormData(inetialValue)
-      document.getElementById("my_modal")?.close();
+      document.getElementById("my_modal_2")?.close();
       swal("Success", roomData.message, "success");
     } else if (roomError) {
-      document.getElementById("my_modal")?.close();
+      document.getElementById("my_modal_2")?.close();
       swal("Failed", roomError?.data?.message, "error");
     }
   }, [roomData, roomError]);
-
+console.log(formData,"form data.")
   return (
-    <dialog id="my_modal" className="modal">
+    <dialog id="my_modal_2" className="modal">
       <div className="modal-box lg:max-w-[50vw] ">
         <form className="mb-4" method="dialog">
           {/* if there is a button in form, it will close the modal */}
@@ -90,48 +113,33 @@ console.log(data,"data..")
           </button>
         </form>
         {/* main content is form here. */}
-        <h1 className="font-semibold text-xl mb-4">Crate A New Product.</h1>
+        <h1 className="font-semibold text-xl mb-4">Update A Product.</h1>
         <div className="flex flex-col lg:flex-row gap-5">
           <label
             className="lg:w-1/2 h-max cursor-pointer"
             htmlFor="product_image"
           >
             <div className="rounded-lg overflow-hidden w-full h-[200px] ">
-              {formData?.img ? (
+             
                 <div className="relative w-full h-full">
-                  {isUploading && (
-                    <div className="to-center flex-col text-gray-200 rounded-lg absolute top-0 left-0 w-full h-full bg-[#3b3b3bc0]">
-                      <span
-                        className={
-                          errorMessage
-                            ? "hidden"
-                            : "loading loading-spinner loading-lg"
-                        }
-                      ></span>
-                      <h1>{errorMessage ? errorMessage : "Uploading"}</h1>
-                    </div>
-                  )}
+                  {isUploading&&<div className="to-center w-full h-full absolute bg-[#6d6d6dc9] flex-col text-white"><span className="loading loading-ring loading-lg"></span> {errorMessage||"Uploading"}</div>}
                   <img
                     className="w-full h-full object-cover"
                     src={formData?.img}
                     alt=""
                   />
                 </div>
-              ) : (
-                <div className="w-full h-full border-dashed border-2 border-black rounded-lg to-center">
-                  Click To Upload
-                </div>
-              )}
+              
             </div>
           </label>
           <input
             className="hidden"
-             accept="image/*"
+            accept="image/*"
             id="product_image"
             type="file"
-            onInput={imageUploadHandle}
+            onInput={imageUpdateUploadHandle}
           />
-          <form onSubmit={formSubmitHandle} className="lg:w-[50%] " action="">
+          <form onSubmit={formUpdateHandle} className="lg:w-[50%] " action="">
             <div className="grid grid-cols-1 gap-3 gap- lg:grid-cols-2">
               <InputField
                 type="text"
@@ -154,13 +162,17 @@ console.log(data,"data..")
               <InputField
                 type="number"
                 altimeValue={formData.quantity}
-                valueUpdate={(e) => update({ quantity: parseInt(e.target.value) })}
+                valueUpdate={(e) =>
+                  update({ quantity: parseInt(e.target.value) })
+                }
                 placeholder="Product Quantity"
               />
               <InputField
                 type="number"
                 altimeValue={formData.rating}
-                valueUpdate={(e) => update({ rating: parseInt(e.target.value) })}
+                valueUpdate={(e) =>
+                  update({ rating: parseInt(e.target.value) })
+                }
                 placeholder="Product Rating"
               />
             </div>
@@ -171,7 +183,7 @@ console.log(data,"data..")
               placeholder="Product Description"
             />
             <div className="text-end">
-              <Button text={"Create"} />
+              <Button disable={isUploading} text={"Update"} />
             </div>
           </form>
         </div>
@@ -180,4 +192,4 @@ console.log(data,"data..")
   );
 };
 
-export default Modal;
+export default UpdateModal;
