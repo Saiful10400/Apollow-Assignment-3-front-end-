@@ -14,7 +14,10 @@ const Cart = () => {
   console.log(Orders);
 
   const isInStock=()=>{
-    const isOutOfStock=Orders?.find(item=>item.count>item.data.quantity)
+    const isOutOfStock=Orders?.find(item=>{
+        if(item.count>item.data.quantity || item.count===0) return true
+        return false
+    })
     if(isOutOfStock) return true
     return false
   }
@@ -149,7 +152,7 @@ const Cart = () => {
                   </tbody>
                 </table>
               </div>
-              <div className="flex justify-end">
+              <div className="flex justify-end mt-5">
                 <div className="w-[30%] bg-gray-200 p-3 rounded-lg">
                   <h1 className="border-b border-gray-400 text-2xl flex justify-between items-center">
                     Total: <span>$ {getTotalAmout()}</span>
