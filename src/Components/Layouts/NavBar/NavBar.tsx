@@ -2,7 +2,10 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/whiteLogo.webp";
 import { IoMdCart } from "react-icons/io";
 import CenterAlign from "../../Helper/CenterAlign";
+import { useAppSelector } from "../../../Redux/feathcer/hoocks";
 const NavBar = () => {
+  const count=useAppSelector(state=>state.cartStore)?.length
+ 
   const routes = (
     <>
       <li>
@@ -34,7 +37,7 @@ const NavBar = () => {
 
           <Link to={"/cart"} className="relative">
             <IoMdCart  className="text-white text-3xl"/>{" "}
-            <span className="text-white bg-red-600 rounded-full h-5 w-5 inline-block to-center absolute -top-3 -right-3">5</span>
+            <span className="text-white bg-red-600 rounded-full h-5 w-5 inline-block to-center absolute -top-3 -right-3">{count}</span>
           </Link>
         </div>
       </CenterAlign>

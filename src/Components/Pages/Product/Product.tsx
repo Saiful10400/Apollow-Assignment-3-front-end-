@@ -32,8 +32,8 @@ const Product = () => {
       <div>
 
 
-        <div className="mt-8 flex items-center">
-        <div className=" flex mx-auto w-[30%]">
+        <div className="mt-8 flex items-center justify-between">
+        <div className=" flex  w-[30%]">
 
           <input
             placeholder="Search Keyboards By Name,Keyword or Brand....."

@@ -6,6 +6,7 @@ import { useAppDispatch } from "../../../Redux/feathcer/hoocks";
 import { setProduct } from "../../../Redux/feathcer/DashboardSlice";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
+import Loading from "../../SharedComponent/Loading";
 const Table = () => {
   const { isLoading, data } = useGetProductsQuery(null);
 
@@ -108,7 +109,7 @@ Swal.fire("Product delete successfully!", "", "success");
               })}
         </tbody>
       </table>
-      {isLoading&&<div className="to-center w-full"><span className="loading loading-spinner loading-lg"></span></div>}
+      {isLoading&&<Loading/>}
       {data?.data?.length===0&&<div className="to-center w-full text-lg mt-4">No Product Available!</div>}
       <UpdateModal />
     </div>
