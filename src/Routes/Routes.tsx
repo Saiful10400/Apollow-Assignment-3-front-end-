@@ -5,6 +5,7 @@ import Dashboard from "../Components/Pages/Dashbaord/Dashboard";
 import Product from "../Components/Pages/Product/Product";
 import SingleProduct from "../Components/Pages/SingleProduct/SingleProduct";
 import Cart from "../Components/Pages/Cart/Cart";
+import Checkout from "../Components/Pages/Checkout/Checkout";
 const routes=createBrowserRouter([
     {
         path:"/",
@@ -30,6 +31,10 @@ const routes=createBrowserRouter([
             {
                 path:"/cart",
                 element:<Cart/>
+            },
+            {
+                path:"/checkout",
+                element:<Checkout/>
             },
         ]
     }

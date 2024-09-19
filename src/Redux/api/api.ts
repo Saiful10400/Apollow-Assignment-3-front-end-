@@ -57,8 +57,19 @@ export const baseApi = createApi({
         },
         invalidatesTags: ["Products"]
       }),
+      createABooking: builder.mutation({
+        query: (data) => {
+          return {
+            url: `/booking`,
+            method: "POST",
+            body:data
+           
+          };
+        },
+        invalidatesTags: ["Products"]
+      }),
     };
   },
 });
 
-export const { useGetAProductQuery,useCreateProductMutation, useGetProductsQuery,useUpdateProductMutation,useDeleteProductMutation } = baseApi;
+export const { useGetAProductQuery,useCreateProductMutation,useCreateABookingMutation, useGetProductsQuery,useUpdateProductMutation,useDeleteProductMutation } = baseApi;

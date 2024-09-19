@@ -8,10 +8,11 @@ import {
 import { MdDeleteForever } from "react-icons/md";
 import { others } from "@chakra-ui/react";
 import Button from "../../Ui/Button";
+import { Link } from "react-router-dom";
 const Cart = () => {
   const dispatch = useAppDispatch();
   const Orders = useAppSelector((state) => state.cartStore);
-  console.log(Orders);
+
 
   const isInStock=()=>{
     const isOutOfStock=Orders?.find(item=>{
@@ -33,15 +34,15 @@ const Cart = () => {
   }
   return (
     <CenterAlign>
-      <div className="min-h-[70vh]">
+      <div className="min-h-[70vh] lg:py-28 lg:pt-10">
         {Orders?.length === 0 ? (
-          <div className="to-center w-full text-lg mt-4">
+          <div className="to-center w-full h-[70vh] text-lg mt-4">
             No Order Available!
           </div>
         ) : (
           <>
             <h1 className="text-center text-2xl font-semibold">
-              Your Cart ({Orders?.length}items)
+              Your Cart ({Orders?.length} items)
             </h1>
             <div>
               <div className="overflow-x-auto lg:min-h-[500px] mt-5">
@@ -157,7 +158,7 @@ const Cart = () => {
                   <h1 className="border-b border-gray-400 text-2xl flex justify-between items-center">
                     Total: <span>$ {getTotalAmout()}</span>
                   </h1>
-                  <Button disable={isInStock()} text="Check Out" className=" px-4 rounded-sm mt-4" />
+                  <Link to={"/checkout"} onClick={(e)=>isInStock()&&e.preventDefault()} className={`px-5 py-2  inline-block ${isInStock()?"bg-gray-400 text-gray-500":"bg-black text-white"}  rounded-md text-lg font-semibold mt-4`} >Check Out</Link>
                 </div>
               </div>
             </div>

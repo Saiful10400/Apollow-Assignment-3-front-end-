@@ -41,10 +41,13 @@ const Cartslice = createSlice({
         }
       }
     },
+    clearCart: () => {
+      return []
+    },
   },
 });
 
-export const { cartIncrement, cartIncrementwithNumber, deleteCart } =
+export const { cartIncrement, cartIncrementwithNumber, deleteCart,clearCart } =
   Cartslice.actions;
 
 const cartReducer = Cartslice.reducer;
