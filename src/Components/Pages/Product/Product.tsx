@@ -22,12 +22,18 @@ const Product = () => {
   };
 
   const [searchData, setSearchData] = useState(initialValue);
-  const timerIdRef = useRef(null);
+ 
   const update = (data) => {
-    setSearchData({ ...searchData, ...data });
+    console.log(data,":DATa")
+    setSearchData((prev)=>({...prev,...data }));
+    
   };
 
-  
+  // const update = (data) => {
+  //   setFormData({ ...formData, ...data });
+  // };
+
+
 
   //filtered data- this is a the data which we get form main object query.
 
@@ -47,7 +53,7 @@ const Product = () => {
   // search handle.
   const serArchHandle = (e) => {
     const input = e.target.value;
-
+    console.log("start:",searchData.serchText)
     const queryItems = data?.data?.filter((item) => {
       const name = item.name.toUpperCase();
       const brand = item.brand.toUpperCase();
@@ -57,17 +63,21 @@ const Product = () => {
       }
       return false;
     });
-    update({ maxPrice: 0, minPrice: 0 });
     setQueryData(queryItems);
     setRangeShalow(queryItems)
+   
+    update({ maxPrice: 0, minPrice: 0 ,sortBy: ""});
+   
   };
 
   // debaunch.
+  const inputtimerIdRef = useRef(null);
   const debaunch = (fn, delay) => {
-    let timerId;
+ 
     return (e) => {
-      if (timerId) clearTimeout(timerId);
-      timerId = setTimeout(() => {
+      update({ serchText:e.target.value })
+      if (inputtimerIdRef.current) clearTimeout(inputtimerIdRef.current);
+      inputtimerIdRef.current = setTimeout(() => {
         fn(e);
       }, delay);
     };
@@ -76,6 +86,7 @@ const Product = () => {
 
 
   // range debaunce.
+  const timerIdRef = useRef(null);
   const rangeDebaunch = (fn, delay) => {
    
     return (e) => {
@@ -93,15 +104,42 @@ const Product = () => {
 
   // range handle.
   const rangeHadle = (e) => {
-   console.log(e,"saiful:::::")
+   
     const queryItem=rangeShalow?.filter(item=>{
       if(item.price>=e[0] && item.price<=e[1]) return true
       return false
     })
 
     setQueryData(queryItem)
+    update({sortBy: ""});
   };
 
+
+  // sort dropdown handle.
+  const sortHandle=(e)=>{
+    const input=e.target.value
+   update({ sortBy: input })
+
+   if(input==="l2h" && queryData?.length){
+    const temparray=[...queryData]
+    temparray?.sort((a,b)=>a?.price-b?.price)
+    setQueryData(temparray)
+   }
+   else if(input==="h2l"){
+
+    const temparray=[...queryData]
+    temparray?.sort((a,b)=>b?.price-a?.price)
+    setQueryData(temparray)
+
+   }
+   
+  }
+
+  /// clear button handle.
+  const clearHandle=()=>{
+    setSearchData(initialValue)
+    setQueryData(data.data);
+  }
 
 
   return (
@@ -113,6 +151,7 @@ const Product = () => {
               onChange={debaunch(serArchHandle, 500)}
               placeholder="Search Keyboards By Name,Keyword or Brand....."
               type="text"
+              value={searchData.serchText}
               className="w-full focus:outline-none border-2 border-black rounded-lg py-2 pl-2 font-normal text-lg"
             />
           </div>
@@ -145,20 +184,20 @@ const Product = () => {
           </div>
           <div>
             <select
-              onChange={(e) => update({ sortBy: e.target.value })}
+              onChange={sortHandle}
               value={searchData.sortBy}
               className="h-[40px] ml-3 px-3 border border-black rounded-md"
               name=""
               id=""
             >
               <option value="" disabled selected hidden>
-                Sort By
+                Default
               </option>
-              <option value="Price,low to high">Price,low to high</option>
-              <option value="Price,high to low">Price,high to low</option>
+              <option value="l2h">{`Price (Low > High)`}</option>
+              <option value="h2l">{`Price (High > Low)`}</option>
             </select>
           </div>
-          <button className="h-[40px] bg-black  text-white w-[100px] rounded-md ml-3 font-semibold">
+          <button onClick={clearHandle} className="h-[40px] bg-black  text-white w-[100px] rounded-md ml-3 font-semibold">
             Clear
           </button>
         </div>
