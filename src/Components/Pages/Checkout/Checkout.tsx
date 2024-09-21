@@ -79,7 +79,7 @@ const dispatch=useAppDispatch()
       <div className="min-h-[70vh] lg:py-28 lg:pt-10">
         <h1 className="font-semibold text-5xl mb-9">Order Summary</h1>
         <form onSubmit={bookingHandle} className="flex items-start gap-5 justify-center">
-          <div className="lg:w-1/2">
+          <div data-aos="fade-right" className="lg:w-1/2">
             <div className="grid grid-cols-2 gap-3 ">
               <InputField
                 type="text"
@@ -108,7 +108,7 @@ const dispatch=useAppDispatch()
             </div>
           </div>
 
-          <div className="w-1/2 p-11 pt-0 text-center">
+          <div data-aos="fade-left" className="w-1/2 p-11 pt-0 text-center">
             <h1 className="text-2xl flex justify-between items-center mb-3">
               Total Item: <span>{getTotalItem()} In Cart</span>
             </h1>

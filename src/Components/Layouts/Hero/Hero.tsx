@@ -30,6 +30,7 @@ const keyboardData=getKeyboardData()
   return (
     <>
       <Swiper
+      data-aos="fade-down"
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{

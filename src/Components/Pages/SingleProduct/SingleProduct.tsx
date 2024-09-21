@@ -36,14 +36,14 @@ const dispatch=useAppDispatch()
   };
 
   return (
-    <div className="min-h-[60vh] bg-white lg:py-28 lg:pt-10">
+    <div className="min-h-[60vh] bg-white lg:py-28 lg:pt-10 px-4 lg:px-0">
       <CenterAlign>
-        <div className="flex  justify-center items-start gap-7">
-          <div>
+        <div className="flex flex-col lg:flex-row justify-center items-start gap-7">
+          <div data-aos="fade-right">
             <img className="rounded-lg" src={Product.img} alt="" />
           </div>
 
-          <div className="lg:w-1/2">
+          <div data-aos="fade-left" className="lg:w-1/2">
             <h1 className="lg:text-3xl font-semibold">{Product.name}</h1>
             <div className="flex items-center mt-4 ">
               {getNumberArrayFromNumber(Product.rating).map((item) => (
@@ -85,9 +85,9 @@ const dispatch=useAppDispatch()
           </div>
         </div>
 
-        <div>
-          <h1 className="text-3xl font-semibold mb-6 lg:mt-10">Description</h1>
-          <p className="text-lg">{Product.description}</p>
+        <div data-aos="fade-up">
+          <h1 className="text-3xl text-center lg:text-left mt-5 font-semibold mb-6 lg:mt-10">Description</h1>
+          <p className="text-lg text-center lg:text-left">{Product.description}</p>
         </div>
       </CenterAlign>
     </div>

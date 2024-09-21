@@ -40,7 +40,7 @@ const Cart = () => {
             No Order Available!
           </div>
         ) : (
-          <>
+          <div data-aos="fade-up">
             <h1 className="text-center text-2xl font-semibold">
               Your Cart ({Orders?.length} items)
             </h1>
@@ -61,7 +61,7 @@ const Cart = () => {
                   <tbody className="lg:text-base">
                     {Orders?.map((item, idx) => {
                       return (
-                        <tr
+                        <tr data-aos="fade-down"
                           key={item._id}
                           className={` ${
                             idx % 2 !== 0 ? "bg-[#ffffff]" : "bg-[#f5f0f09c]"
@@ -162,7 +162,7 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </CenterAlign>

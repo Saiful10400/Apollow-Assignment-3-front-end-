@@ -19,6 +19,7 @@ export default function UserReview() {
     <CenterAlign>
       <>
         <Swiper
+        data-aos="fade-down"
           centeredSlides={true}
           pagination={{
             type: "custom",

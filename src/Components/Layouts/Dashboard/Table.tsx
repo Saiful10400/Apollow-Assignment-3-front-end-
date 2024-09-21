@@ -1,6 +1,9 @@
 import { LiaEditSolid } from "react-icons/lia";
 import { MdDeleteForever } from "react-icons/md";
-import { useDeleteProductMutation, useGetProductsQuery } from "../../../Redux/api/api";
+import {
+  useDeleteProductMutation,
+  useGetProductsQuery,
+} from "../../../Redux/api/api";
 import UpdateModal from "../../Ui/UpdateModal";
 import { useAppDispatch } from "../../../Redux/feathcer/hoocks";
 import { setProduct } from "../../../Redux/feathcer/DashboardSlice";
@@ -13,17 +16,14 @@ const Table = () => {
   const dispatch = useAppDispatch();
   // update handle.
   const updateHandle = (data) => {
-
     dispatch(setProduct(data));
     document.getElementById("my_modal_2")?.showModal();
   };
 
-
   const [
     deleteProduct,
     { isLoading: roomLoading, data: productData, error: roomError },
-  ]=useDeleteProductMutation()
-
+  ] = useDeleteProductMutation();
 
   // deleting handle.
   const deleteHandle = (id) => {
@@ -32,26 +32,25 @@ const Table = () => {
       showDenyButton: true,
       showCancelButton: false,
       confirmButtonText: "No",
-      denyButtonText: `Yes`
+      denyButtonText: `Yes`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isDenied) {
-        
-        deleteProduct({_id:id})
-      } 
+        deleteProduct({ _id: id });
+      }
     });
   };
 
-useEffect(()=>{
-if(productData){
-  if(productData.statusCode===200){
-Swal.fire("Product delete successfully!", "", "success");
-  }
-}
-},[productData])
+  useEffect(() => {
+    if (productData) {
+      if (productData.statusCode === 200) {
+        Swal.fire("Product delete successfully!", "", "success");
+      }
+    }
+  }, [productData]);
 
   return (
-    <div className="overflow-x-auto mt-5">
+    <div data-aos="fade-up" className="overflow-x-auto mt-5">
       <table className="table">
         {/* head */}
         <thead>
@@ -64,53 +63,58 @@ Swal.fire("Product delete successfully!", "", "success");
           </tr>
         </thead>
         <tbody className="lg:text-base">
-          {!isLoading&& data?.data.map((item, idx) => {
-                return (
-                  <tr
-                    key={item._id}
-                    className={` ${
-                      idx % 2 !== 0 ? "bg-[#ffffff]" : "bg-[#f5f0f09c]"
-                    }`}
-                  >
-                    <td className="font-semibold">{(idx += 1)}</td>
-                    <td>
-                      <div className="flex items-center justify-start gap-3">
-                        <div className="">
-                          <div className=" rounded-lg h-[60px] w-[80px]">
-                            <img
-                              className="w-full h-full rounded-lg object-cover"
-                              src={item.img}
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <div className="font-bold">{item.name}</div>
+          {!isLoading &&
+            data?.data.map((item, idx) => {
+              return (
+                <tr data-aos="fade-down"
+                  key={item._id}
+                  className={` ${
+                    idx % 2 !== 0 ? "bg-[#ffffff]" : "bg-[#f5f0f09c]"
+                  }`}
+                >
+                  <td className="font-semibold">{(idx += 1)}</td>
+                  <td>
+                    <div className="flex items-center justify-start gap-3">
+                      <div className="">
+                        <div className=" rounded-lg h-[60px] w-[80px]">
+                          <img
+                            className="w-full h-full rounded-lg object-cover"
+                            src={item.img}
+                          />
                         </div>
                       </div>
-                    </td>
-                    <td className="font-semibold">$ {item.price}</td>
-                    <td className="font-semibold">{item.brand}</td>
-                    <td className="w-max flex mt-3 ">
-                      <button
-                        onClick={() => updateHandle(item)}
-                        className="btn btn-success text-white btn-sm text-lg"
-                      >
-                        <LiaEditSolid />
-                      </button>
-                      <button
-                        onClick={() => deleteHandle(item._id)}
-                        className="btn btn-error text-white btn-sm text-lg ml-4"
-                      >
-                        <MdDeleteForever />
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
+                      <div>
+                        <div className="font-bold">{item.name}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="font-semibold">$ {item.price}</td>
+                  <td className="font-semibold">{item.brand}</td>
+                  <td className="w-max flex mt-3 ">
+                    <button
+                      onClick={() => updateHandle(item)}
+                      className="btn btn-success text-white btn-sm text-lg"
+                    >
+                      <LiaEditSolid />
+                    </button>
+                    <button
+                      onClick={() => deleteHandle(item._id)}
+                      className="btn btn-error text-white btn-sm text-lg ml-4"
+                    >
+                      <MdDeleteForever />
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
-      {isLoading&&<Loading/>}
-      {data?.data?.length===0&&<div className="to-center w-full text-lg mt-4">No Product Available!</div>}
+      {isLoading && <Loading />}
+      {data?.data?.length === 0 && (
+        <div className="to-center w-full text-lg mt-4">
+          No Product Available!
+        </div>
+      )}
       <UpdateModal />
     </div>
   );

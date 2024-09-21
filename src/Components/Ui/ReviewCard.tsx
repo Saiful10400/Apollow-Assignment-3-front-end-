@@ -1,14 +1,12 @@
-
 import getNumberArrayFromNumber from "../../Utils/getNumberArrayFromNumber";
 import { FaStar } from "react-icons/fa6";
 
-
-const ReviewCard = ({ img, ratings, testimonials,user }) => {
+const ReviewCard = ({ img, ratings, testimonials, user }) => {
   return (
     <div className="bg-[#f9f9f9] shadow-lg rounded-lg p-5">
       <img
         className="w-[70px] h-[70px] rounded-full object-cover"
-        src={"/src/assets/advertisement/"+img}
+        src={"/src/assets/advertisement/" + img}
         alt=""
       />
       <div className="flex items-center my-3 ">
@@ -18,7 +16,9 @@ const ReviewCard = ({ img, ratings, testimonials,user }) => {
       </div>
 
       <div className="h-[100px]">
-       {testimonials.length<=150?testimonials:testimonials.slice(0,150)+"  ..."}
+        {testimonials.length <= 150
+          ? testimonials
+          : testimonials.slice(0, 150) + "  ..."}
       </div>
       <div className="lg:mt-5">
         <h1 className="lg:text-2xl">{user.name}</h1>

@@ -145,8 +145,9 @@ const Product = () => {
   return (
     <CenterAlign>
       <div>
-        <div className="mt-8 flex items-center justify-between">
-          <div className=" flex  w-[30%]">
+        <div data-aos="fade-down" className="mt-8 lg:p-0 px-4 flex flex-col lg:flex-row items-center justify-between lg:gap-0 gap-y-4">
+
+          <div className=" flex  lg:w-[30%] w-full">
             <input
               onChange={debaunch(serArchHandle, 500)}
               placeholder="Search Keyboards By Name,Keyword or Brand....."
@@ -155,7 +156,9 @@ const Product = () => {
               className="w-full focus:outline-none border-2 border-black rounded-lg py-2 pl-2 font-normal text-lg"
             />
           </div>
-          <div className="flex items-center w-[40%] gap-9">
+
+
+          <div className="flex items-center lg:w-[40%] w-full gap-9">
             <h1 className="min-w-[100px] to-center rounded-md text-lg  min-h-[40px] border border-black font-normal">
              Min: ${searchData.minPrice}
             </h1>
@@ -182,6 +185,8 @@ const Product = () => {
               Max: ${searchData.maxPrice}
             </h1>
           </div>
+
+
           <div>
             <select
               onChange={sortHandle}
@@ -196,10 +201,11 @@ const Product = () => {
               <option value="l2h">{`Price (Low > High)`}</option>
               <option value="h2l">{`Price (High > Low)`}</option>
             </select>
-          </div>
-          <button onClick={clearHandle} className="h-[40px] bg-black  text-white w-[100px] rounded-md ml-3 font-semibold">
+            <button onClick={clearHandle} className="h-[40px] bg-black  text-white w-[100px] rounded-md ml-3 font-semibold">
             Clear
           </button>
+          </div>
+          
         </div>
 
         {queryData?.length === 0 ? (
@@ -207,7 +213,7 @@ const Product = () => {
             No Product Available!
           </div>
         ) : (
-          <div className="grid grid-cols-1 mt-12 lg:grid-cols-5 lg:gap-5">
+          <div className="grid grid-cols-1 mt-12 lg:px-2 px-4 lg:grid-cols-5 lg:gap-5 gap-4">
             {queryData?.map((item) => (
               <ProductCart key={item._id} data={item} />
             ))}
