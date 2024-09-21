@@ -6,6 +6,8 @@ import Product from "../Components/Pages/Product/Product";
 import SingleProduct from "../Components/Pages/SingleProduct/SingleProduct";
 import Cart from "../Components/Pages/Cart/Cart";
 import Checkout from "../Components/Pages/Checkout/Checkout";
+import ContactUs from "../Components/Pages/ContactUs/ContactUs";
+import AboutUs from "../Components/Pages/AboutUs/AboutUs";
 const routes=createBrowserRouter([
     {
         path:"/",
@@ -31,6 +33,14 @@ const routes=createBrowserRouter([
             {
                 path:"/cart",
                 element:<Cart/>
+            },
+            {
+                path:"/about-us",
+                element:<AboutUs/>
+            },
+            {
+                path:"/contact-us",
+                element:<ContactUs/>
             },
             {
                 path:"/checkout",
