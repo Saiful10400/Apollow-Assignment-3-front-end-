@@ -26,34 +26,49 @@ const Footer = () => {
   return (
     <div className="bg-black text-gray-200  min-h-[200px] pt-10 pb-14">
       <CenterAlign>
-        <div className="flex flex-col lg:flex-row justify-center items-center items-start lg:justify-start lg:w-[80%] gap-10 ">
-          <ul className="flex flex-col items-start w-[20%] font-semibold gap-2">
+        <div className="flex flex-col lg:flex-row justify-center items-center lg:items-start lg:justify-start lg:w-[80%] gap-10 ">
+          <ul className="flex flex-col lg:items-start  items-center lg:w-[20%] font-semibold gap-2">
             <span className="font-bold text-lg mb-3">Main Menu</span>
             {MainManues}
           </ul>
 
-          <div className="lg:w-[30%]">
+          <div className="lg:w-[30%]  w-full lg:text-start text-center">
             <span className="font-bold text-lg text-center lg:text-start">
               Follow Us
             </span>
-            <div className="flex items-center gap-5 pt-5">
-              <a target="_blank" href="https://www.linkedin.com" className="w-[30px] h-[30px] to-center bg-gray-800 rounded-full">
+            <div className="flex lg:justify-start justify-center items-center gap-5 pt-5">
+              <a
+                target="_blank"
+                href="https://www.linkedin.com"
+                className="w-[30px] h-[30px] to-center bg-gray-800 rounded-full"
+              >
                 <RiLinkedinFill />
               </a>
-              <a target="_blank" href="https://x.com" className="w-[30px] h-[30px] to-center bg-gray-800 rounded-full">
+              <a
+                target="_blank"
+                href="https://x.com"
+                className="w-[30px] h-[30px] to-center bg-gray-800 rounded-full"
+              >
                 <RiTwitterXFill />
               </a>
-              <a target="_blank" href="https://www.instagram.com" className="w-[30px] h-[30px] to-center bg-gray-800 rounded-full">
+              <a
+                target="_blank"
+                href="https://www.instagram.com"
+                className="w-[30px] h-[30px] to-center bg-gray-800 rounded-full"
+              >
                 <FaInstagram />
               </a>
-              <a target="_blank" href="https://gmail.com" className="w-[30px] h-[30px] to-center bg-gray-800 rounded-full">
+              <a
+                target="_blank"
+                href="https://gmail.com"
+                className="w-[30px] h-[30px] to-center bg-gray-800 rounded-full"
+              >
                 <TfiEmail />
               </a>
-             
             </div>
           </div>
 
-          <div className="lg:w-[30%]">
+          <div className="lg:w-[30%] w-full lg:text-start text-center">
             <span className="font-bold text-lg mb-3">Feedback</span>
             <h1 className="pt-5">
               You can send us Feedback via our Contact Form, support@keygem.com
@@ -62,13 +77,11 @@ const Footer = () => {
             </h1>
           </div>
         </div>
-        <div className="mt-8 flex justify-between items-start">
-          <h1>
+        <div className="mt-8 flex flex-col-reverse lg:flex-row justify-between items-start">
+          <h1 className="lg:text-start text-center w-full">
             Copyright © 2024 Mecha Store.
-            <br />
-            Powered by Shopify
           </h1>
-          <div className="flex items-center justify-end gap-4">
+          <div className="flex items-center justify-center lg:justify-end w-full gap-4">
             <img className="w-[50px]" src={masterCard} alt="" />
             <img className="w-[50px]" src={paypal} alt="" />
             <img className="w-[50px]" src={americanExress} alt="" />
