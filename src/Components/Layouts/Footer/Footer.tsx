@@ -24,9 +24,9 @@ const Footer = () => {
   );
 
   return (
-    <div className="bg-black text-gray-200  min-h-[200px] pt-10 pb-14">
+    <div className="bg-black text-gray-200  min-h-[200px] -mb-6 pt-10 lg:pb-14">
       <CenterAlign>
-        <div className="flex flex-col lg:flex-row justify-center items-center lg:items-start lg:justify-start lg:w-[80%] gap-10 ">
+        <div className="flex flex-col  lg:flex-row justify-center items-center lg:items-start lg:justify-start lg:w-[80%] gap-10 ">
           <ul className="flex flex-col lg:items-start  items-center lg:w-[20%] font-semibold gap-2">
             <span className="font-bold text-lg mb-3">Main Menu</span>
             {MainManues}

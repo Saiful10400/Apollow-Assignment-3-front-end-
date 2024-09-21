@@ -13,11 +13,15 @@ import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import CenterAlign from "../../Helper/CenterAlign";
 import ReviewCard from "../../Ui/ReviewCard";
 import getReviewData from "./DemoData";
+import Tittle from "../../Ui/Tittle";
+
 
 export default function UserReview() {
   return (
     <CenterAlign>
+      
       <>
+      <Tittle text="Customer Reviews" />
         <Swiper
         data-aos="fade-down"
           centeredSlides={true}
