@@ -23,5 +23,17 @@ Mecha is an e-commerce platform for keyboard enthusiasts, allowing users to add,
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/mecha.git
-   git commit -m "Add new feature"
+   
+# Usage
+
+Users can browse keyboard listings, add new products, update or delete existing keyboard details, and place orders.
+
+## Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature-name
 
