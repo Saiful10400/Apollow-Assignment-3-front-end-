@@ -45,11 +45,12 @@ const dispatch=useAppDispatch()
 
           <div data-aos="fade-left" className="lg:w-1/2">
             <h1 className="lg:text-3xl font-semibold">{Product.name}</h1>
+            <h1 className="lg:text-base bg-gray-300 w-max p-1 px-2 rounded-md text-black font-normal mt-5">{Product.brand}</h1>
             <div className="flex items-center mt-4 ">
               {getNumberArrayFromNumber(Product.rating).map((item) => (
                 <FaStar className="text-[#f0b407] text-2xl" key={item} />
               ))}
-              <span className="ml-4">({Product.rating})</span>
+              {/* <span className="ml-4">({Product.rating})</span> */}
             </div>
             <h1 className="font-normal text-5xl mt-4">${Product.price}</h1>
 

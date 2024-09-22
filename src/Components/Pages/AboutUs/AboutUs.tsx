@@ -10,7 +10,7 @@ const AboutUs = () => {
         <div  className="flex px-4 lg:px-0 items-start flex-col-reverse lg:flex-row justify-center">
           <div data-aos="fade-right" className="lg:w-1/2 w-full mt-20">
             <h1 className="lg:text-6xl text-4xl lg:text-left text-center font-normal">About MECHA</h1>
-            <p className="mt-4 text-lg lg:text-left text-center lg:text-3xl">
+            <p className="mt-4 text-lg lg:text-left text-center lg:text-xl">
               We are committed not only to bringing you the best about
               mechanical keyboards, also turning the best designs into real
               products.

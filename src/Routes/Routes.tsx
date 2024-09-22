@@ -8,6 +8,7 @@ import Cart from "../Components/Pages/Cart/Cart";
 import Checkout from "../Components/Pages/Checkout/Checkout";
 import ContactUs from "../Components/Pages/ContactUs/ContactUs";
 import AboutUs from "../Components/Pages/AboutUs/AboutUs";
+import SuccessPayment from "../Components/Layouts/SuccessPayment/SuccessPayment";
 const routes=createBrowserRouter([
     {
         path:"/",
@@ -45,6 +46,10 @@ const routes=createBrowserRouter([
             {
                 path:"/checkout",
                 element:<Checkout/>
+            },
+            {
+                path:"/Success-order",
+                element:<SuccessPayment/>
             },
         ]
     }

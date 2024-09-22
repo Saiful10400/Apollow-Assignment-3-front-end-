@@ -1,6 +1,12 @@
-import { useState } from "react";
+import { ChangeEvent, FC } from "react";
 
-const InputField = ({ type, placeholder, altimeValue, valueUpdate }) => {
+interface InputFieldProps {
+  type: string;  // For now, you can specify 'string' for 'type', but you can also restrict it to 'text' | 'textarea' | 'password', etc.
+  placeholder: string;
+  altimeValue?: string;
+  valueUpdate?: (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;  // Handles both input and textarea
+}
+const InputField: FC<InputFieldProps> = ({ type, placeholder, altimeValue, valueUpdate }) => {
 
 
   return (

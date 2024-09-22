@@ -6,11 +6,12 @@ import { IoIosSend } from "react-icons/io";
 import { FaPhoneVolume } from "react-icons/fa6";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import Button from "../../Ui/Button";
+import { FormEvent } from "react";
 
 const ContactUs = () => {
   // send response handle.
 
-  const messageSendHandle = (e) => {
+  const messageSendHandle = (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     swal(
       "Thank you for reaching out!",
@@ -69,7 +70,7 @@ const ContactUs = () => {
                   >
                     <IoIosSend className="text-xl" />{" "}
                     <span className="underline font-bold text-base">
-                      Start a live chat
+                      Send us and email
                     </span>
                   </a>
                 </li>
@@ -81,7 +82,7 @@ const ContactUs = () => {
                   >
                     <BsTwitterX className="text-xl" />{" "}
                     <span className="underline font-bold text-base">
-                      Start a live chat
+                      Message us on x
                     </span>
                   </a>
                 </li>
